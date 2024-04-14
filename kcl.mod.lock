@@ -1,4 +1,12 @@
 [dependencies]
+  [dependencies.argo-cd]
+    name = "argo-cd"
+    full_name = "argo-cd_0.1.0"
+    version = "0.1.0"
+    sum = "OBNHC9e7tMjN8p7UMEpb5hQWyM2TPsi/7hknYLNQT8U="
+    reg = "ghcr.io"
+    repo = "kcl-lang/argo-cd"
+    oci_tag = "0.1.0"
   [dependencies.k8s]
     name = "k8s"
     full_name = "k8s_1.28"

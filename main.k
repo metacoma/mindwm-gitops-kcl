@@ -14,5 +14,6 @@ ns2: k8core.Namespace {
 manifests.yaml_stream([
     ns1,
     ns2,
-    helm_cert_manager.ns3
+    helm_cert_manager.ns3,
+    helm_cert_manager.cert_manager
 ])
