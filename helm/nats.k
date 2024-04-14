@@ -1,0 +1,59 @@
+import k8s.api.core.v1 as k8core
+
+
+import ..argocd_app
+
+ArgoCdNamespace = "argocd"
+
+
+ns3: k8core.Namespace {
+    metadata.name = "ns3"
+}
+
+nats = argocd_app.ArgoCdHelmRelease {
+    metadata = {
+        name = "",
+        namespace = ArgoCdNamespace
+    },
+    spec = {
+        destination = {
+            namespace = "nats"
+        }
+        source = {
+            chart = "nats",
+            repoURL = "https://nats-io.github.io/k8s/helm/charts/",
+            targetRevision = "1.1.10"
+            helm = {
+                valuesObject = {
+                    config = {
+                        cluster.merge.name = "nats-cluster"
+                        jetstream.enable = True
+                        merge.accounts = {
+                            "$SYS.users" = {
+                                user = "sys"
+                                password = "pass"
+                            }
+                            root = {
+                                jetstream = "enable"
+                                user = "sys"
+                                password = "pass"
+                            }
+                        }
+                    }
+                    service = {
+                        merge.spec.type = 'NodePort'
+                        ports.cluster.enabled = True
+                    }
+
+                     
+                }
+                releaseName = "nats"
+            }
+        }
+        syncPolicy = {
+            automated = {},
+            syncOptions = ["CreateNamespace=true"]
+        }
+    }
+}
+

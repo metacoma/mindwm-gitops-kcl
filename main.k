@@ -1,21 +1,10 @@
-import k8s.api.core.v1 as k8core
 import manifests
-import helm_cert_manager
-import helm_redpanda
-
-ns1: k8core.Namespace {
-    metadata.name = "ns1"
-}
-
-ns2: k8core.Namespace {
-    metadata.name = "ns2"
-}
-
+import helm.redpanda as helm_redpanda
+import helm.cert_manager as helm_cert_manager
+import helm.nats as helm_nats
 
 manifests.yaml_stream([
-    ns1,
-    ns2,
-    helm_cert_manager.ns3,
     helm_cert_manager.cert_manager
     helm_redpanda.redpanda_operator
+    helm_nats.nats
 ])

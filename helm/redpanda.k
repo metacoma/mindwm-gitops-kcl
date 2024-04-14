@@ -1,6 +1,6 @@
 import k8s.api.core.v1 as k8core
 
-import .argocd_app
+import ..argocd_app
 
 ArgoCdNamespace = "argocd"
 
