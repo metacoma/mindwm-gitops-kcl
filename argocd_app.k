@@ -1,10 +1,13 @@
 import k8s.apimachinery.pkg.apis.meta.v1 as meta
 
+ArgoCdDefaultNamespace = "argocd"
 
 schema ArgoCdHelmRelease:
     apiVersion: str = "argoproj.io/v1alpha1"
     kind: str = "Application"
-    metadata: meta.ObjectMeta
+    metadata: meta.ObjectMeta = {
+        namespace = ArgoCdDefaultNamespace
+    }
     spec: ArgoCdSpec
 
 schema ArgoCdSpec: 

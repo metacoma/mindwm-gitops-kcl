@@ -3,17 +3,9 @@ import k8s.api.core.v1 as k8core
 
 import ..argocd_app
 
-ArgoCdNamespace = "argocd"
-
-
-ns3: k8core.Namespace {
-    metadata.name = "ns3"
-}
-
 cert_manager = argocd_app.ArgoCdHelmRelease {
     metadata = {
         name = "cert-manager",
-        namespace = ArgoCdNamespace
     },
     spec = {
         destination = {

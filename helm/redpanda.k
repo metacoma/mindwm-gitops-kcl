@@ -2,13 +2,9 @@ import k8s.api.core.v1 as k8core
 
 import ..argocd_app
 
-ArgoCdNamespace = "argocd"
-
-
 redpanda_operator = argocd_app.ArgoCdHelmRelease {
     metadata = {
         name = "redpanda",
-        namespace = ArgoCdNamespace
     },
     spec = {
         destination = {
