@@ -1,3 +1,4 @@
 kcl_cli_configs:
   files:
     - main.k
+    - helm_cert_manager.k
