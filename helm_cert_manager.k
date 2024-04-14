@@ -9,7 +9,7 @@ ns3: k8core.Namespace {
 }
 
 schema ArgoCdHelmRelease:
-    application: str = "argoproj.io/v1alpha1"
+    apiVersion: str = "argoproj.io/v1alpha1"
     kind: str = "Application"
     metadata: meta.ObjectMeta
     spec: ArgoCdSpec
