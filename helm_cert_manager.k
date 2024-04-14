@@ -18,6 +18,11 @@ schema ArgoCdSpec:
     project: str = "default"
     source: ArgoCdSpecSource
     syncPolicy: ArgoAppSyncPolicy
+    destination: ArgoCdAppDestination
+
+schema ArgoCdAppDestination:
+    namespace: str
+    server: str = "https://kubernetes.default.svc"
 
 schema ArgoCdSpecSource:
     chart: str
@@ -40,6 +45,9 @@ cert_manager: ArgoCdHelmRelease {
         namespace = ArgoCdNamespace
     },
     spec = {
+        destination = {
+            namespace = "cert-manager"
+        }
         source = { 
             chart = "cert-manager",
             repoURL = "https://charts.jetstack.io",
