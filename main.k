@@ -3,11 +3,11 @@ import manifests
 import helm_cert_manager
 
 ns1: k8core.Namespace {
-    metadata.name = "web-app"
+    metadata.name = "ns1"
 }
 
 ns2: k8core.Namespace {
-    metadata.name = "web-app"
+    metadata.name = "ns2"
 }
 
 
