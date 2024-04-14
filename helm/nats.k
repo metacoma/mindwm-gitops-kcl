@@ -12,7 +12,7 @@ ns3: k8core.Namespace {
 
 nats = argocd_app.ArgoCdHelmRelease {
     metadata = {
-        name = "",
+        name = "nats",
         namespace = ArgoCdNamespace
     },
     spec = {
