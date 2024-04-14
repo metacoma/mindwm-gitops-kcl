@@ -12,7 +12,7 @@ ns3: k8core.Namespace {
 
 cert_manager = argocd_app.ArgoCdHelmRelease {
     metadata = {
-        name = "cert-manager3",
+        name = "cert-manager",
         namespace = ArgoCdNamespace
     },
     spec = {
