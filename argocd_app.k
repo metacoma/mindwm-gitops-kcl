@@ -24,7 +24,7 @@ schema ArgoCdSpecSource:
     helm: ArgoCdHelm
 
 schema ArgoCdHelm:
-    valuesObject: any
+    valuesObject?: any
     releaseName: str
 
 schema ArgoAppSyncPolicy: 
