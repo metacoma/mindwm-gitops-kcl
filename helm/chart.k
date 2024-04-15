@@ -14,3 +14,9 @@ nats : schema.HelmChart = {
     name = "nats"
     repoURL = "https://nats-io.github.io/k8s/helm/charts/",
 }
+
+istio_base : schema.HelmChart = {
+    name = "base"
+    repoURL = "https://istio-release.storage.googleapis.com/charts",
+}
+

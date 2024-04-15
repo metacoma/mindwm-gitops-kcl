@@ -35,4 +35,11 @@ manifests.yaml_stream([
         }
     })
 
+    argocdSchema.argoHelmRelease({
+        namespace = "istio-system"
+        name = "istio-base"
+        chart = charts.istio_base
+        version = "1.21.0"
+    })
+
 ])
