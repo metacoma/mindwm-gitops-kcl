@@ -1,42 +1,51 @@
-import argoproj.v1alpha1 as argoproj
 import manifests
+import .helm.chart as charts
+import .argocd.schema as argocdSchema
 
-redpanda: argoproj.Application = {
-    metadata = {
-        name = "redpanda"
-        namespace = "argocd"
-    } 
-    spec = {
-        destination = {
-            namespace = "redpanda"
-            server = "https://kubernetes.default.svc"
-        }
-        project = "default"
-        source = {
-            chart = "operator"
-            repoURL = "https://charts.redpanda.com"
-            targetRevision = "0.4.20"
-            helm = {
-                releaseName = "redpanda-operator"
+
+
+manifests.yaml_stream([
+
+    argocdSchema.argoHelmRelease({
+        namespace = "redpanda"
+        name = "redpanda-operator"
+        chart = charts.redpanda_operator
+        version = "0.4.20"
+    })
+
+    argocdSchema.argoHelmRelease({
+        namespace = "cert-manager"
+        name = "cert-manager"
+        chart = charts.cert_manager
+        version = "1.14.4"
+    })
+
+    argocdSchema.argoHelmRelease({
+        namespace = "nats"
+        name = "nats"
+        chart = charts.cert_manager
+        version = "1.1.10"
+        values = {
+            config = {
+                cluster.merge.name = "nats-cluster"
+                jetstream.enable = True
+                merge.accounts = {
+                    "$SYS.users" = {
+                        user = "sys"
+                        password = "pass"
+                    }
+                    root = {
+                        jetstream = "enable"
+                        user = "sys"
+                        password = "pass"
+                    }
+                }
+            }
+            service = {
+                merge.spec.type = 'NodePort'
+                ports.cluster.enabled = True
             }
         }
-        syncPolicy = {
-            automated = {}
-            syncOptions = [ "CreateNamespace=true" ]
-        }
-    }
+    })
 
-} 
-
-#import helm.redpanda as helm_redpanda
-#import helm.cert_manager as helm_cert_manager
-#import helm.nats as helm_nats
-#import helm.istio as helm_istio
-#
-manifests.yaml_stream([
-    redpanda
-#    helm_cert_manager.cert_manager
-#    helm_redpanda.redpanda_operator
-#    helm_nats.nats
-#    helm_istio.istio
 ])
