@@ -1,6 +1,7 @@
 import manifests
 import .helm.chart as charts
 import .argocd.schema as argocdSchema
+import .nats.config as nats
 
 
 
@@ -23,24 +24,10 @@ manifests.yaml_stream([
     argocdSchema.argoHelmRelease({
         namespace = "nats"
         name = "nats"
-        chart = charts.cert_manager
+        chart = charts.nats
         version = "1.1.10"
         values = {
-            config = {
-                cluster.merge.name = "nats-cluster"
-                jetstream.enable = True
-                merge.accounts = {
-                    "$SYS.users" = {
-                        user = "sys"
-                        password = "pass"
-                    }
-                    root = {
-                        jetstream = "enable"
-                        user = "sys"
-                        password = "pass"
-                    }
-                }
-            }
+            config = nats.config
             service = {
                 merge.spec.type = 'NodePort'
                 ports.cluster.enabled = True
