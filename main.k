@@ -49,6 +49,7 @@ manifests.yaml_stream([
         name = "gateway"
         chart = charts.istio_gateway
         version = istio.version
-    })
+    }) | { spec.syncPolicy.syncOptions = [] }
+
 
 ])
