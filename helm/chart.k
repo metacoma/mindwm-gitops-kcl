@@ -1,0 +1,16 @@
+import .schema as schema
+
+redpanda_operator : schema.HelmChart = {
+    name = "operator"
+    repoURL = "https://charts.redpanda.comk"
+}
+
+cert_manager : schema.HelmChart = {
+    name = "cert-manager"
+    repoURL = "https://charts.jetstack.io",
+} 
+
+nats : schema.HelmChart = {
+    name = "nats"
+    repoURL = "https://nats-io.github.io/k8s/helm/charts/",
+} 
