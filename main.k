@@ -3,6 +3,8 @@ import .helm.chart as charts
 import .argocd.schema as argocdSchema
 import .nats.config as nats
 
+import .istio as istio
+
 
 
 manifests.yaml_stream([
@@ -39,7 +41,7 @@ manifests.yaml_stream([
         namespace = "istio-system"
         name = "istio-base"
         chart = charts.istio_base
-        version = "1.21.0"
+        version = istio.version
     })
 
 ])
