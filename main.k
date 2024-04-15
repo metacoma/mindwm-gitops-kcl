@@ -44,4 +44,11 @@ manifests.yaml_stream([
         version = istio.version
     })
 
+    argocdSchema.argoHelmRelease({
+        namespace = "istio-ingress"
+        name = "gateway"
+        chart = charts.istio_gateway
+        version = istio.version
+    })
+
 ])
