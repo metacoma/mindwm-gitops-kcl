@@ -1,6 +1,3 @@
-import k8s.api.core.v1 as k8core
-
-
 import ..argocd_app
 
 nats = argocd_app.ArgoCdHelmRelease {
@@ -37,7 +34,7 @@ nats = argocd_app.ArgoCdHelmRelease {
                         ports.cluster.enabled = True
                     }
 
-                     
+
                 }
                 releaseName = "nats"
             }
