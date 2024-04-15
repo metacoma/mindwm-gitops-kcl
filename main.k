@@ -2,12 +2,19 @@ import manifests
 import .helm.chart as charts
 import .argocd.schema as argocdSchema
 import .nats.config as nats
+import k8s.api.core.v1 as k8core
 
 import .istio as istio
 
 
 
 manifests.yaml_stream([
+    k8core.Namespace {
+        metadata.name =  istio.gateway.namespace
+        metadata.labels = {
+            "istio-injection" = "enabled"
+        } 
+    }
 
     argocdSchema.argoHelmRelease({
         namespace = "redpanda"
@@ -45,7 +52,7 @@ manifests.yaml_stream([
     })
 
     argocdSchema.argoHelmRelease({
-        namespace = "istio-ingress"
+        namespace = istio.gateway.namespace
         name = "gateway"
         chart = charts.istio_gateway
         version = istio.version
