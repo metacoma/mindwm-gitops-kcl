@@ -19,6 +19,7 @@ schema argoHelmRelease[release: helmSchema.HelmRelease](argoproj.Application):
             targetRevision = release.version
             helm = {
                 values = yaml.encode(release.values)
+                releaseName = release.name
             }
 
                 
