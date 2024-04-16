@@ -9,12 +9,18 @@ import .istio as istio
 
 
 manifests.yaml_stream([
-    k8core.Namespace {
-        metadata.name =  istio.gateway.namespace
+
+    # istio-injection namespace
+    [k8core.Namespace {
+        metadata.name = ns
         metadata.labels = {
             "istio-injection" = "enabled"
         } 
-    }
+    } for ns in [ 
+        istio.gateway.namespace, 
+        "knative-serving"
+        ]
+    ]
 
     argocdSchema.argoHelmRelease({
         namespace = "redpanda"
