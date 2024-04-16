@@ -62,7 +62,16 @@ manifests.yaml_stream([
         name = "istiod"
         chart = charts.istiod
         version = istio.version
-    })
+    }) | {
+        spec.ignoreDifferences = [
+            {
+                group = "admissionregistration.k8s.io"
+                kind = "ValidatingWebhookConfiguration"
+                name = "istiod-default-validator"
+                jsonPointers = ["/webhooks/0/failurePolicy"]
+            }
+        ]
+    }
 
     argocdSchema.argoHelmRelease({
         namespace = istio.gateway.namespace
