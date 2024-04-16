@@ -85,6 +85,9 @@ manifests.yaml_stream([
     knative.KnativeServing {
         metadata.name = "knative-serving"
         metadata.namespace = knativeConfig.serving.namespace
+        spec.config.istio = {
+            "local-gateway.${istio.gateway.namespace}.knative-local-gateway" = "knative-local-gateway.${istio.system.namespace}.svc.cluster.local"
+        } 
     } 
 
     knative.KnativeEventing {
