@@ -5,6 +5,7 @@ BOOTSTRAP_REPO := https://github.com/metacoma/mindwm-gitops-kcl
 
 #--volume /etc/resolv.conf:/etc/resolv.conf
 
+.PHONY = mindwm create argocd argocd_password argocd_login argocd_kcl_app argocd_infrastructure_app
 
 
 create: delete
@@ -42,11 +43,4 @@ argocd_kcl_app:
 		--dest-server https://kubernetes.default.svc \
 		--config-management-plugin kcl-v1.0
 
-argocd_infrastructure_app:
-	argocd app create mindwm-infrastructure \
-		--repo $(BOOTSTRAP_REPO) \
-		--path manifests \
-		--dest-namespace default \
-		--dest-server https://kubernetes.default.svc \
-
-mindwm: create argocd argocd_password argocd_login argocd_kcl_app argocd_infrastructure_app
+mindwm: create argocd argocd_password argocd_login argocd_kcl_app

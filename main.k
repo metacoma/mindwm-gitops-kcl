@@ -5,6 +5,8 @@ import .nats.config as nats
 import k8s.api.core.v1 as k8core
 import knative_operator.v1beta1 as knative
 import knative as knativeConfig
+import file
+import yaml
 
 import .istio as istio
 
@@ -83,7 +85,8 @@ manifests.yaml_stream([
         name = "istiod"
         chart = charts.istiod
         version = istio.version
-    })
+    }) 
+    
 
     argocdSchema.argoHelmRelease({
         namespace = istio.gateway.namespace
@@ -104,5 +107,9 @@ manifests.yaml_stream([
         metadata.name = "knative-eventing"
         metadata.namespace = knativeConfig.eventing.namespace
     } 
+
+    yaml.decode_all(file.read("manifests/net-istio.yaml"))
+
+    yaml.decode_all(file.read("manifests/knative-operator.yaml"))
 
 ])
