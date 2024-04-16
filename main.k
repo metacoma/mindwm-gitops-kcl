@@ -14,16 +14,26 @@ manifests.yaml_stream([
 
     # istio-injection namespace
     [k8core.Namespace {
-        metadata.name = ns
-        metadata.labels = {
-            "istio-injection" = "enabled"
-        } 
+        metadata.name = ns.name
+        metadata.labels = ns.labels
     } for ns in [ 
-        istio.gateway.namespace, 
-        "knative-serving"
+        {
+          name = istio.gateway.namespace
+          labels = {
+            "istio-injection" = "enabled"
+          } 
+        },
+        {
+          name = knativeConfig.serving.namespace
+          labels = {
+            "istio-injection" = "enabled"
+          } 
+        },
+        {
+            name = knativeConfig.eventing.namespace
+        }
         ]
     ]
-
     argocdSchema.argoHelmRelease({
         namespace = "redpanda"
         name = "redpanda-operator"
