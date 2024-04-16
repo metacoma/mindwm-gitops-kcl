@@ -60,7 +60,7 @@ manifests.yaml_stream([
     argocdSchema.argoHelmRelease({
         namespace = istio.system.namespace,
         name = "istiod"
-        chart = charts.istio_base
+        chart = charts.istiod
         version = istio.version
     })
 
