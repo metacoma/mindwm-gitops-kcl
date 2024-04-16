@@ -4650,5 +4650,3 @@ spec:
           ports:
             - name: metrics
               containerPort: 9090
-
----
