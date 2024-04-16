@@ -12,7 +12,7 @@ import yaml
 import .istio as istio
 
 
-configmap = k8core.Namespace {
+ns = k8core.Namespace {
   metadata = {
     name = "test-namespace"
     annotations = {
@@ -21,8 +21,15 @@ configmap = k8core.Namespace {
   } 
 } 
 
+configmap = k8core.ConfigMap {
+    data = {
+        a = "abc"
+    }
+} 
+
 
 
 manifests.yaml_stream([
+    ns
     configmap
 ])
