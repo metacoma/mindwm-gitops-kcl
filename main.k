@@ -39,4 +39,11 @@ configmap = k8core.ConfigMap {
 manifests.yaml_stream([
     ns
     configmap
+    argocdSchema.argoHelmRelease({
+        namespace = "cert-manager"
+        name = "cert-manager"
+        chart = charts.cert_manager
+        version = "1.14.4"
+    })
+
 ])

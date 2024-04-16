@@ -7,7 +7,7 @@ schema argoHelmRelease[release: helmSchema.HelmRelease](argoproj.Application):
         name = release.name
         namespace = "argocd"
         annotations = {
-             "argocd.argoproj.io/sync-wave" = "5" 
+             "argocd.argoproj.io/sync-wave" = "0" 
         }
     }
     spec = {
