@@ -86,4 +86,9 @@ manifests.yaml_stream([
         metadata.namespace = "knative-serving"
     } 
 
+    knative.KnativeEventing {
+        metadata.name = "knative-eventing"
+        metadata.namespace = "knative-eventing"
+    } 
+
 ])
