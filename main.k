@@ -3,6 +3,7 @@ import .helm.chart as charts
 import .argocd.schema as argocdSchema
 import .nats.config as nats
 import k8s.api.core.v1 as k8core
+import knative_operator.v1beta1 as knative
 
 import .istio as istio
 
@@ -80,5 +81,9 @@ manifests.yaml_stream([
         version = istio.version
     }) | { spec.syncPolicy.syncOptions = [] }
 
+    knative.KnativeServing {
+        metadata.name = "knative-serving"
+        metadata.namespace = "knative-serving"
+    } 
 
 ])
