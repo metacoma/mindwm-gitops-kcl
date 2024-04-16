@@ -55,13 +55,6 @@ manifests.yaml_stream([
         name = "istio-base"
         chart = charts.istio_base
         version = istio.version
-    })
-
-    argocdSchema.argoHelmRelease({
-        namespace = istio.system.namespace,
-        name = "istiod"
-        chart = charts.istiod
-        version = istio.version
     }) | {
         spec.ignoreDifferences = [
             {
@@ -72,6 +65,13 @@ manifests.yaml_stream([
             }
         ]
     }
+
+    argocdSchema.argoHelmRelease({
+        namespace = istio.system.namespace,
+        name = "istiod"
+        chart = charts.istiod
+        version = istio.version
+    })
 
     argocdSchema.argoHelmRelease({
         namespace = istio.gateway.namespace
