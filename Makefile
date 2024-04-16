@@ -38,6 +38,7 @@ argocd_login: kubectl_proxy argocd_password
 argocd_kcl_app:
 	argocd app create mindwm \
 		--repo $(BOOTSTRAP_REPO) \
+		--revision argocd_wave_test \
 		--path . \
 		--dest-namespace default \
 		--dest-server https://kubernetes.default.svc \
