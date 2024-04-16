@@ -16,7 +16,6 @@ ns = k8core.Namespace {
   metadata = {
     name = "test-namespace"
     annotations = {
-        test = "test"
         "argocd.argoproj.io/sync-wave" = "1"
     } 
   } 
@@ -26,7 +25,9 @@ configmap = k8core.ConfigMap {
     metadata = {
         name = "test-configmap"
         namespace = "test-namespace"
-        "argocd.argoproj.io/sync-wave" = "5" 
+        annotations = {
+            "argocd.argoproj.io/sync-wave" = "5" 
+        }
     } 
     data = {
         a = "abc"
