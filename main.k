@@ -24,6 +24,7 @@ ns = k8core.Namespace {
 configmap = k8core.ConfigMap {
     metadata = {
         name = "test-configmap"
+        namespace = "test-namespace"
     } 
     data = {
         a = "abc"
