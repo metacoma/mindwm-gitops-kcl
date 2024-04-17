@@ -95,18 +95,18 @@ manifests.yaml_stream([
         version = istio.version
     }) | { spec.syncPolicy.syncOptions = [] }
 
-    knative.KnativeServing {
-        metadata.name = "knative-serving"
-        metadata.namespace = knativeConfig.serving.namespace
-        spec.config.istio = {
-            "local-gateway.${istio.gateway.namespace}.knative-local-gateway" = "knative-local-gateway.${istio.system.namespace}.svc.cluster.local"
-        }
-    }
-
-    knative.KnativeEventing {
-        metadata.name = "knative-eventing"
-        metadata.namespace = knativeConfig.eventing.namespace
-    }
+#    knative.KnativeServing {
+#        metadata.name = "knative-serving"
+#        metadata.namespace = knativeConfig.serving.namespace
+#        spec.config.istio = {
+#            "local-gateway.${istio.gateway.namespace}.knative-local-gateway" = "knative-local-gateway.${istio.system.namespace}.svc.cluster.local"
+#        }
+#    }
+#
+#    knative.KnativeEventing {
+#        metadata.name = "knative-eventing"
+#        metadata.namespace = knativeConfig.eventing.namespace
+#    }
 
     #yaml.decode_all(file.read("manifests/net-istio.yaml"))
 
