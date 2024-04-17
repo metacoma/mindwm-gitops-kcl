@@ -18,18 +18,18 @@ manifests.yaml_stream([
     [k8core.Namespace {
         metadata.name = ns.name
         metadata.labels = ns.labels
-    } for ns in [ 
+    } for ns in [
         {
           name = istio.gateway.namespace
           labels = {
             "istio-injection" = "enabled"
-          } 
+          }
         },
         {
           name = knativeConfig.serving.namespace
           labels = {
             "istio-injection" = "enabled"
-          } 
+          }
         },
         {
             name = knativeConfig.eventing.namespace
@@ -85,8 +85,8 @@ manifests.yaml_stream([
         name = "istiod"
         chart = charts.istiod
         version = istio.version
-    }) 
-    
+    })
+
 
     argocdSchema.argoHelmRelease({
         namespace = istio.gateway.namespace
@@ -100,16 +100,16 @@ manifests.yaml_stream([
         metadata.namespace = knativeConfig.serving.namespace
         spec.config.istio = {
             "local-gateway.${istio.gateway.namespace}.knative-local-gateway" = "knative-local-gateway.${istio.system.namespace}.svc.cluster.local"
-        } 
-    } 
+        }
+    }
 
     knative.KnativeEventing {
         metadata.name = "knative-eventing"
         metadata.namespace = knativeConfig.eventing.namespace
-    } 
+    }
 
-    yaml.decode_all(file.read("manifests/net-istio.yaml"))
+    #yaml.decode_all(file.read("manifests/net-istio.yaml"))
 
-    yaml.decode_all(file.read("manifests/knative-operator.yaml"))
+    #yaml.decode_all(file.read("manifests/knative-operator.yaml"))
 
 ])
