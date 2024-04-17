@@ -34,6 +34,9 @@ manifests.yaml_stream([
         {
             name = knativeConfig.eventing.namespace
         }
+        {
+            name = "demo-namespaceXXX"
+        }
         ]
     ]
     argocdSchema.argoHelmRelease({
